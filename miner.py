@@ -1589,11 +1589,11 @@ def monitor_blocks_directory(account):
                     xuni = ""
                 if super_blocks_count == 0 and normal_blocks_count == 0 and xuni_blocks_count == 0:
                     pbar.set_postfix({"Stat":f"Active:{BLUE}{active_processes}{RESET}, HashRate:{BLUE}{total_hash_rate:.2f}{RESET}h/s", 
-                                    "Difficulty":f"{YELLOW}{memory_cost}{RESET}"},f"{account}", refresh=True)
+                                    "Difficulty":f"{YELLOW}{memory_cost}{RESET}","address":f"{YELLOW}{account}{RESET}"}, refresh=True)
                 else:
                     pbar.set_postfix({"Details": f"{superblock}{block}{xuni}", 
                                     "Stat":f"Active:{BLUE}{active_processes}{RESET}, HashRate:{BLUE}{total_hash_rate:.2f}{RESET}h/s", 
-                                    "Difficulty":f"{YELLOW}{memory_cost}{RESET}"},f"{account}", refresh=True)
+                                    "Difficulty":f"{YELLOW}{memory_cost}{RESET}","address":f"{YELLOW}{account}{RESET}"}, refresh=True)
 
                 time.sleep(1)
             except Exception as e:
