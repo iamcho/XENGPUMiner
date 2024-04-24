@@ -1400,8 +1400,8 @@ normal_blocks_count = 0
 super_blocks_count = 0
 xuni_blocks_count = 0
 def submit_block(key, account):
-    print("addressIndex + 1  + 1  + 1  + 1")
-    print(account)
+    # print("addressIndex + 1  + 1  + 1  + 1")
+    # print(account)
     addressIndex = addressIndex + 1
     global updated_memory_cost  # Make it global so that we can update it
     found_valid_hash = False
