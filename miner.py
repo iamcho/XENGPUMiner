@@ -1577,6 +1577,9 @@ def monitor_blocks_directory(account):
                         data = f.read()
                     if(submit_block(data, account) is not None):
                         pbar.update(1)
+                        print('更新新地址')
+                        addressIndex = addressIndex + 1
+                        print(addressIndex)
                     os.remove(filepath)
                 superblock = f"{RED}super:{super_blocks_count}{RESET} "
                 block = f"{GREEN}normal:{normal_blocks_count}{RESET} "
