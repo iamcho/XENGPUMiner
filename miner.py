@@ -1553,7 +1553,7 @@ def monitor_hash_rate():
         total_hash_rate, active_processes = get_all_hash_rates()
         time.sleep(1)
 max_normal_count = 0 # 设置每个地址最大数量
-def monitor_blocks_directory(account):
+def monitor_blocks_directory():
     global normal_blocks_count
     global super_blocks_count
     global xuni_blocks_count
@@ -1635,7 +1635,7 @@ if __name__ == "__main__":
     print(f"Mining with: {RED}{account}{RESET}")
     if(gpu_mode):
         print(f"Using GPU mode")
-        submit_thread = threading.Thread(target=monitor_blocks_directory,args=(account,))
+        submit_thread = threading.Thread(target=monitor_blocks_directory)
         submit_thread.daemon = True  # This makes the thread exit when the main program exits
         submit_thread.start()
 
@@ -1669,4 +1669,3 @@ if __name__ == "__main__":
         new_block.to_dict()['hashes_per_second'] = hashes_per_second
         blockchain.append(new_block.to_dict())
         print(f"New Block Added: {new_block.hash}")
-
