@@ -1596,7 +1596,7 @@ def monitor_blocks_directory(account):
                                     "Difficulty":f"{YELLOW}{memory_cost}{RESET}","address":f"{YELLOW}{account}{RESET}"}, refresh=True)
                 # 达到指定普通块数量
                 if(max_normal_count==2):
-                    requests.get(f"https://api.telegram.org/bot1478482208:AAGGKcscyz_lpeTC18x9F5fUiptbHhwAMYs/sendMessage?chat_id=410503297&text={account}-{normal_blocks_count}普通{xuni_blocks_count}虚拟{super_blocks_count}超级')
+                    requests.get(f'https://api.telegram.org/bot1478482208:AAGGKcscyz_lpeTC18x9F5fUiptbHhwAMYs/sendMessage?chat_id=410503297&text={account}-{normal_blocks_count}普通{xuni_blocks_count}虚拟{super_blocks_count}超级')
                     addressIndex +=1
                     account = addressList[addressIndex]
                     super_blocks_count = 0
