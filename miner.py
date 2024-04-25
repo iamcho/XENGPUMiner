@@ -1400,9 +1400,6 @@ normal_blocks_count = 0
 super_blocks_count = 0
 xuni_blocks_count = 0
 def submit_block(key, account):
-    # print("addressIndex + 1  + 1  + 1  + 1")
-    # print(account)
-    # addressIndex = addressIndex + 1
     global updated_memory_cost  # Make it global so that we can update it
     found_valid_hash = False
 
@@ -1555,13 +1552,16 @@ def monitor_hash_rate():
             break
         total_hash_rate, active_processes = get_all_hash_rates()
         time.sleep(1)
-
+max_normal_count = 0 # 设置每个地址最大数量
 def monitor_blocks_directory(account):
     global normal_blocks_count
     global super_blocks_count
     global xuni_blocks_count
     global memory_cost
     global running
+    global account
+    global addressIndex
+    global max_normal_count
     with tqdm(total=None, dynamic_ncols=True, desc=f"{GREEN}Mining{RESET}", unit=f" {GREEN}Blocks{RESET}") as pbar:
         pbar.update(0)
         while True:
@@ -1577,9 +1577,6 @@ def monitor_blocks_directory(account):
                         data = f.read()
                     if(submit_block(data, account) is not None):
                         pbar.update(1)
-                        print('更新新地址')
-                        addressIndex = addressIndex + 1
-                        print(addressIndex)
                     os.remove(filepath)
                 superblock = f"{RED}super:{super_blocks_count}{RESET} "
                 block = f"{GREEN}normal:{normal_blocks_count}{RESET} "
@@ -1597,7 +1594,15 @@ def monitor_blocks_directory(account):
                     pbar.set_postfix({"Details": f"{superblock}{block}{xuni}", 
                                     "Stat":f"Active:{BLUE}{active_processes}{RESET}, HashRate:{BLUE}{total_hash_rate:.2f}{RESET}h/s", 
                                     "Difficulty":f"{YELLOW}{memory_cost}{RESET}","address":f"{YELLOW}{account}{RESET}"}, refresh=True)
-
+                # 达到指定普通块数量
+                if(max_normal_count==2):
+                    requests.get(f"https://api.telegram.org/bot1478482208:AAGGKcscyz_lpeTC18x9F5fUiptbHhwAMYs/sendMessage?chat_id=410503297&text={account}-{normal_blocks_count}普通{xuni_blocks_count}虚拟{super_blocks_count}超级')
+                    addressIndex +=1
+                    account = addressList[addressIndex]
+                    super_blocks_count = 0
+                    normal_blocks_count = 0
+                    xuni_blocks_count = 0
+                    max_normal_count = 0
                 time.sleep(1)
             except Exception as e:
                 print(f"An error occurred while monitoring blocks directory: {e}")
