@@ -1576,6 +1576,7 @@ def monitor_blocks_directory():
                     with open(filepath, 'r') as f:
                         data = f.read()
                     if(submit_block(data, account) is not None):
+                        max_normal_count +=1
                         pbar.update(1)
                     os.remove(filepath)
                 superblock = f"{RED}super:{super_blocks_count}{RESET} "
