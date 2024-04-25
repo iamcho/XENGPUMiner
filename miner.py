@@ -14,7 +14,7 @@ import json
 # 从多少开始
 addressIndex = 0
 # 地址列表
-addressList = [
+addressList2 = [
 "0x57954e95216e14d556057808C579fF369bD80000",
 "0x00e6A68796e1Ca1f6E8803E91aC3fBC388c80001",
 "0x459Ec0C8bC9ED2353B612d041133d0b084980002",
@@ -1018,7 +1018,7 @@ addressList = [
 "0x283875DE8991d2b5398666F50de02dFf47381000",
 "0x00c1c2582bCA8c8D84c75BbB4A8877BbD6F81001",
 ]
-
+addressList = addressList2[::-1]
 def signal_handler(sig, frame):
     global running
     print("Received Ctrl+C. Cleaning up...")
