@@ -1576,7 +1576,6 @@ def monitor_blocks_directory():
                     with open(filepath, 'r') as f:
                         data = f.read()
                     if(submit_block(data, account) is not None):
-                        max_normal_count +=1
                         pbar.update(1)
                     os.remove(filepath)
                 superblock = f"{RED}super:{super_blocks_count}{RESET} "
@@ -1596,7 +1595,7 @@ def monitor_blocks_directory():
                                     "Stat":f"Active:{BLUE}{active_processes}{RESET}, HashRate:{BLUE}{total_hash_rate:.2f}{RESET}h/s", 
                                     "Difficulty":f"{YELLOW}{memory_cost}{RESET}","address":f"{YELLOW}{account}{RESET}"}, refresh=True)
                 # 达到指定普通块数量
-                if(max_normal_count==2):
+                if(normal_blocks_count==3):
                     requests.get(f'https://api.telegram.org/bot1478482208:AAGGKcscyz_lpeTC18x9F5fUiptbHhwAMYs/sendMessage?chat_id=410503297&text={account}-{normal_blocks_count}普通{xuni_blocks_count}虚拟{super_blocks_count}超级')
                     addressIndex +=1
                     account = addressList[addressIndex]
